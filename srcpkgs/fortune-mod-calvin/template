@@ -1,0 +1,26 @@
+# Template file for 'fortune-mod-bofh-excuses'
+pkgname=fortune-mod-calvin
+version=0.3
+revision=1
+create_wrksrc=yes
+hostmakedepends="fortune-mod"
+depends="${hostmakedepends}"
+short_desc="Calvin and Hobbes fortune cookies"
+maintainer="Flammable Duck <flammableduck@protonmail.com>"
+license="unknown"
+homepage="https://www.netmeister.org/misc.html"
+distfiles="https://www.netmeister.org/apps/fortunes-calvin-${version}.gz"
+checksum=bc209717639927cdceec65df7b7b4f2b091899da9311ab8108cf45759be4a13d
+
+
+do_build() {
+    mv fortunes-calvin-0.3 calvin
+    strfile calvin
+}
+
+do_install() {
+    vmkdir usr/share/fortunes
+    cat calvin
+    vcopy  calvin /usr/share/fortunes
+    vcopy  calvin.dat /usr/share/fortunes
+}

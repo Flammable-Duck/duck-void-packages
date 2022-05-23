@@ -1,0 +1,22 @@
+# Template file for 'fortune-mod-vimtips'
+pkgname=fortune-mod-vimtips
+version=20160824
+revision=1
+create_wrksrc=yes
+hostmakedepends="fortune-mod"
+depends="${hostmakedepends}"
+short_desc="Vim tips fortune cookies"
+maintainer="Flammable Duck <flammableduck@protonmail.com>"
+license="unknown"
+homepage="https://github.com/hobbestigrou/vimtips-fortune"
+
+do_build() {
+    cp ${FILESDIR}/vimtips ${wrksrc}
+    strfile vimtips
+}
+
+do_install() {
+    vmkdir usr/share/fortunes
+    vcopy  vimtips /usr/share/fortunes
+    vcopy  vimtips.dat /usr/share/fortunes
+}

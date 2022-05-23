@@ -1,0 +1,24 @@
+# Template file for 'fortune-mod-bofh-excuses'
+pkgname=fortune-mod-bofh-excuses
+version=20212129
+revision=1
+create_wrksrc=yes
+hostmakedepends="fortune-mod"
+depends="${hostmakedepends}"
+short_desc="BOFH excuses fortune cookie files"
+maintainer="Flammable Duck <flammableduck@protonmail.com>"
+license="Public Domain"
+homepage="http://pages.cs.wisc.edu/~ballard/bofh"
+
+do_build() {
+    cp ${FILESDIR}/bofh-excuses.raw ${wrksrc}
+    awk '{ printf "BOFH excuse #%d:\n\n%s\n%%\n", FNR, $0 }'\
+        bofh-excuses.raw > bofh-excuses
+    strfile bofh-excuses
+}
+
+do_install() {
+    vmkdir usr/share/fortunes
+    vcopy  bofh-excuses /usr/share/fortunes
+    vcopy  bofh-excuses.dat /usr/share/fortunes
+}

@@ -1,0 +1,23 @@
+# Template file for 'fortune-mod-cybersuntzu'
+pkgname=fortune-mod-cybersuntzu
+version=20191203
+revision=1
+depends="fortune-mod"
+create_wrksrc=yes
+hostmakedepends="${depends}"
+makedepends="${depends}"
+short_desc="Cyber Sun Tzu fortune cookies"
+maintainer="Flammable Duck <flammableduck@protonmail.com>"
+license="Public Domain"
+homepage="https://twitter.com/suntzucyber"
+
+do_build() {
+    cp ${FILESDIR}/cybersuntzu ${wrksrc}
+    strfile cybersuntzu
+}
+
+do_install() {
+    vmkdir usr/share/fortunes
+    vcopy  cybersuntzu /usr/share/fortunes
+    vcopy  cybersuntzu.dat /usr/share/fortunes
+}

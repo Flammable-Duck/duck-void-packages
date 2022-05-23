@@ -1,0 +1,24 @@
+# Template file for 'fortune-mod-portal'
+pkgname=fortune-mod-portal
+version=1.0
+revision=1
+create_wrksrc=yes
+hostmakedepends="fortune-mod"
+depends="${hostmakedepends}"
+short_desc="Fortune cookies from the Portal series"
+maintainer="Flammable Duck <flammableduck@protonmail.com>"
+license="unknown"
+homepage="https://github.com/outadoc/portal-fortunes"
+distfiles="https://github.com/outadoc/portal-fortunes/archive/refs/tags/v${version}.tar.gz"
+checksum=610da6390a296d1126e0bfb01e2f6c2adfd34591de6105274365b6d8fd32ea92
+
+do_build() {
+    cd portal-fortunes-1.0
+    make clean && make
+}
+
+do_install() {
+    cd portal-fortunes-1.0
+    vmkdir usr/share/fortunes
+    vcopy  fortunes/* /usr/share/fortunes
+}

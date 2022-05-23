@@ -1,0 +1,38 @@
+# Template file for 'fortune-mod-confucius'
+pkgname=fortune-mod-confucius
+version=20211229
+revision=1
+#archs="i686 x86_64"
+#wrksrc=
+#create_wrksrc=yes
+# build_style=gnu-configure
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends="fortune-mod"
+makedepends=""
+depends=""
+short_desc="Fortune cookies: Confucius sayings"
+maintainer="Flammable Duck <flammableduck@protonmail.com>"
+license="WTFPL"
+homepage="https://billy.wolfe.casa/fortunes/"
+# distfiles="https://billy.wolfe.casa/fortunes/confucius"
+# checksum=977f4584283e3a4dc8ec8429e64f891d04fbb69dc712491a301744357434d89c
+
+do_fetch() {
+    curl -O https://billy.wolfe.casa/fortunes/confucius
+    # echo $(ls) asdsfdhjghgbghj
+}
+
+do_build() {
+    cp ${FILESDIR}/confucius ${wrksrc}
+
+    strfile confucius
+}
+do_install() {
+    vmkdir usr/share/fortunes
+    vcopy  confucius /usr/share/fortunes
+    vcopy  confucius.dat /usr/share/fortunes
+}
